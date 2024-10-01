@@ -20,50 +20,19 @@ export default {
 		fixable: 'code',
 		docs: {
 			category: ['Schema'],
-			description:
-        'Enforce arrange type definitions in order of ther usage.',
+			description: 'Enforce arrange type definitions in order of ther usage.',
 			examples: [
 				{
 					title: 'Incorrect',
 					code: /* GraphQL */ `
-            type User {
+						type User {
 							username: String
-              password: String
-            }
+							password: String
+						}
 
 						type Query {
 							me: User
 						}
-          `
-				},
-				{
-					title: 'Correct',
-					code: /* GraphQL */ `
-						type Query {
-							me: User
-						}
-
-            type User {
-							username: String
-              password: String
-            }
-          `
-				},
-				{
-					title: 'Incorrect',
-					code: /* GraphQL */ `
-						type Query {
-							me: User
-
-						}
-
-						scalar Language
-
-            type User {
-							username: String
-              password: String
-							language: Language
-            }
 					`
 				},
 				{
@@ -73,14 +42,44 @@ export default {
 							me: User
 						}
 
-            type User {
+						type User {
 							username: String
-              password: String
-							language: Language
-            }
+							password: String
+						}
+					`
+				},
+				{
+					title: 'Incorrect',
+					code: /* GraphQL */ `
+						type Query {
+							me: User
+
+						}
 
 						scalar Language
-          `
+
+						type User {
+							username: String
+							password: String
+							language: Language
+						}
+					`
+				},
+				{
+					title: 'Correct',
+					code: /* GraphQL */ `
+						type Query {
+							me: User
+						}
+
+						type User {
+							username: String
+							password: String
+							language: Language
+						}
+
+						scalar Language
+					`
 				},
 				{
 					title: 'Incorrect',
@@ -90,18 +89,18 @@ export default {
 							status: Status
 						}
 
-            type User {
+						type User {
 							username: String
-              password: String
+							password: String
 							language: Language
-            }
+						}
 
 						type Status {
 							up: Boolean
 						}
 
 						scalar Language
-          `
+					`
 				},
 				{
 					title: 'Correct',
@@ -111,18 +110,18 @@ export default {
 							status: Status
 						}
 
-            type User {
+						type User {
 							username: String
-              password: String
+							password: String
 							language: Language
-            }
+						}
 
 						scalar Language
 
 						type Status {
 							up: Boolean
 						}
-          `
+					`
 				}
 			]
 		},
