@@ -138,21 +138,28 @@ export default {
 
 		function getBeforeComments(node) {
 			const commentsBefore = sourceCode.getCommentsBefore(node);
+
 			if (commentsBefore.length === 0) {
 				return [];
 			}
+
 			const tokenBefore = sourceCode.getTokenBefore(node);
+
 			if (tokenBefore) {
 				return commentsBefore.filter(comment => !isNodeAndCommentOnSameLine(tokenBefore, comment));
 			}
+
 			const filteredComments = [];
 			const nodeLine = node.loc.start.line;
+
 			// Break on comment that not attached to node
 			for (let i = commentsBefore.length - 1; i >= 0; i -= 1) {
 				const comment = commentsBefore[i];
+
 				if (nodeLine - comment.loc.start.line - filteredComments.length > 1) {
 					break;
 				}
+
 				filteredComments.unshift(comment);
 			}
 
@@ -163,6 +170,7 @@ export default {
 			if (node.kind === Kind.VARIABLE) {
 				node = node.parent;
 			}
+
 			const [firstBeforeComment] = getBeforeComments(node);
 			const [firstAfterComment] = sourceCode.getCommentsAfter(node);
 			const from = firstBeforeComment || node;
@@ -216,6 +224,7 @@ export default {
 					break;
 				case 'Mutation':
 					mutation = node;
+
 					if (subscription) {
 						reportReorder(node, subscription);
 					}
@@ -225,6 +234,7 @@ export default {
 					subscription = node;
 
 					break;
+
 				default:
 					if (typeIndex === -1) {
 						unusedTypes[typeName] = true;

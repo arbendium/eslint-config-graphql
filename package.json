@@ -1,26 +1,21 @@
 {
   "name": "@arbendium/eslint-config-graphql",
   "version": "0.0.1",
-  "description": "ESLint config for GraphQL based on B2o5T/graphql-eslint",
+  "description": "ESLint config for GraphQL",
   "repository": "github:arbendium/eslint-config-graphql",
   "type": "module",
   "files": [
-    "plugin-graphql",
+    "rules",
     "index.js"
   ],
   "exports": "./index.js",
   "scripts": {
-    "lint": "eslint plugin-graphql index.js eslint.config.js"
+    "lint": "eslint rules index.js eslint.config.js"
   },
   "license": "ISC",
   "dependencies": {
-    "@graphql-tools/code-file-loader": "^8.0.2",
-    "@graphql-tools/graphql-tag-pluck": "^8.0.2",
-    "@graphql-tools/utils": "^10.0.7",
-    "graphql": "^16.8.1",
-    "graphql-config": "^5.0.3",
-    "graphql-depth-limit": "^1.1.0",
-    "lodash.lowercase": "^4.3.0"
+    "@graphql-eslint/eslint-plugin": "^4.3.0",
+    "graphql": "^16.10.0"
   },
   "peerDependencies": {
     "eslint": "^8.51.0"

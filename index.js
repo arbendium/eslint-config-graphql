@@ -1,19 +1,15 @@
-import rules from './plugin-graphql/rules.js';
-import parseForESLint from './plugin-graphql/parser.js';
-import processor from './plugin-graphql/processor.js';
-import { requireGraphQLSchemaFromContext, requireSiblingsOperations } from './plugin-graphql/utils.js';
+// eslint-disable-next-line import/no-unresolved
+import graphqlPlugin from '@graphql-eslint/eslint-plugin';
+import ruleTupeUsageOrder from './rules/type-usage-order.js';
+
+graphqlPlugin.rules['type-usage-order'] = ruleTupeUsageOrder;
 
 export default [{
 	languageOptions: {
-		parser: { parseForESLint }
+		parser: graphqlPlugin.parser
 	},
 	plugins: {
-		graphql: {
-			processors: { graphql: processor },
-			requireGraphQLSchemaFromContext,
-			requireSiblingsOperations,
-			rules
-		}
+		graphql: graphqlPlugin
 	},
 	rules: {
 		'graphql/description-style': 'error',
@@ -32,12 +28,12 @@ export default [{
 				EnumValueDefinition: 'UPPER_CASE'
 			}
 		],
-		'graphql/no-case-insensitive-enum-values-duplicates': 'error',
 		'graphql/no-unreachable-types': 'error',
 		'graphql/provided-required-arguments': 'error',
 		'graphql/require-deprecation-reason': 'error',
 		'graphql/unique-directive-names': 'error',
 		'graphql/unique-directive-names-per-location': 'error',
+		'graphql/unique-enum-value-names': 'error',
 		'graphql/unique-field-definition-names': 'error',
 		'graphql/unique-operation-types': 'error',
 		'graphql/unique-type-names': 'error',
