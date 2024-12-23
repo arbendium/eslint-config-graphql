@@ -1,6 +1,6 @@
 {
   "name": "@arbendium/eslint-config-graphql",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "ESLint config for GraphQL",
   "repository": "github:arbendium/eslint-config-graphql",
   "type": "module",
