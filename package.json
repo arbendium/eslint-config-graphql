@@ -14,13 +14,13 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@graphql-eslint/eslint-plugin": "^4.3.0",
-    "graphql": "^16.10.0"
+    "@graphql-eslint/eslint-plugin": "^4.4.0",
+    "graphql": "^16.14.1"
   },
   "peerDependencies": {
-    "eslint": "^9.17.0"
+    "eslint": "^10"
   },
   "devDependencies": {
-    "@arbendium/eslint-config-base": "^2.0.0"
+    "@arbendium/eslint-config-base": "file:../eslint-config-base/arbendium-eslint-config-base-2.2.0.tgz"
   }
 }

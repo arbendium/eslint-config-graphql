@@ -8,7 +8,7 @@ function getTypeDependencies(node) {
 	visit(node.rawNode(), {
 		NamedType(node) {
 			fieldTypes.add(node.name.value);
-		}
+		},
 	});
 
 	return [...fieldTypes];
@@ -33,7 +33,7 @@ export default {
 						type Query {
 							me: User
 						}
-					`
+					`,
 				},
 				{
 					title: 'Correct',
@@ -46,7 +46,7 @@ export default {
 							username: String
 							password: String
 						}
-					`
+					`,
 				},
 				{
 					title: 'Incorrect',
@@ -63,7 +63,7 @@ export default {
 							password: String
 							language: Language
 						}
-					`
+					`,
 				},
 				{
 					title: 'Correct',
@@ -79,7 +79,7 @@ export default {
 						}
 
 						scalar Language
-					`
+					`,
 				},
 				{
 					title: 'Incorrect',
@@ -100,7 +100,7 @@ export default {
 						}
 
 						scalar Language
-					`
+					`,
 				},
 				{
 					title: 'Correct',
@@ -121,13 +121,13 @@ export default {
 						type Status {
 							up: Boolean
 						}
-					`
-				}
-			]
+					`,
+				},
+			],
 		},
 		messages: {
-			[RULE_ID]: '{{ currNode }} should be before {{ prevNode }}'
-		}
+			[RULE_ID]: '{{ currNode }} should be before {{ prevNode }}',
+		},
 	},
 	create(context) {
 		const sourceCode = context.getSourceCode();
@@ -187,20 +187,20 @@ export default {
 				messageId: RULE_ID,
 				data: {
 					currNode: node.name.value,
-					prevNode: otherNode.name.value
+					prevNode: otherNode.name.value,
 				},
 				* fix(fixer) {
 					const prevRange = getRangeWithComments(otherNode);
 					const currRange = getRangeWithComments(node);
 					yield fixer.replaceTextRange(
 						prevRange,
-						sourceCode.getText({ range: currRange })
+						sourceCode.getText({ range: currRange }),
 					);
 					yield fixer.replaceTextRange(
 						currRange,
-						sourceCode.getText({ range: prevRange })
+						sourceCode.getText({ range: prevRange }),
 					);
-				}
+				},
 			});
 		}
 
@@ -211,34 +211,34 @@ export default {
 		let subscription;
 
 		return {
-			'[kind=/.+TypeDefinition/]': node => {
+			'[kind=/.+TypeDefinition/]'(node) {
 				const typeName = node.name.value;
 				const typeIndex = usedTypes.indexOf(typeName);
 
 				switch (typeName) {
-				case 'Query':
-					if (mutation || subscription) {
-						reportReorder(node, mutation ?? subscription);
-					}
+					case 'Query':
+						if (mutation || subscription) {
+							reportReorder(node, mutation ?? subscription);
+						}
 
-					break;
-				case 'Mutation':
-					mutation = node;
+						break;
+					case 'Mutation':
+						mutation = node;
 
-					if (subscription) {
-						reportReorder(node, subscription);
-					}
+						if (subscription) {
+							reportReorder(node, subscription);
+						}
 
-					break;
-				case 'Subscription':
-					subscription = node;
+						break;
+					case 'Subscription':
+						subscription = node;
 
-					break;
+						break;
 
-				default:
-					if (typeIndex === -1) {
-						unusedTypes[typeName] = true;
-					}
+					default:
+						if (typeIndex === -1) {
+							unusedTypes[typeName] = true;
+						}
 				}
 
 				const additionalFieldTypes = getTypeDependencies(node)
@@ -268,7 +268,7 @@ export default {
 					usedTypes.splice(
 						typeIndex + 1,
 						0,
-						...additionalFieldTypes
+						...additionalFieldTypes,
 					);
 				}
 			},
@@ -276,7 +276,7 @@ export default {
 				const dependencies = getTypeDependencies(node);
 
 				usedTypes.push(...dependencies.filter(type => !usedTypes.includes(type)));
-			}
+			},
 		};
-	}
+	},
 };

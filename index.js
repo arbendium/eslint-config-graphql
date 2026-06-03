@@ -6,10 +6,10 @@ graphqlPlugin.rules['type-usage-order'] = ruleTupeUsageOrder;
 
 export default [{
 	languageOptions: {
-		parser: graphqlPlugin.parser
+		parser: graphqlPlugin.parser,
 	},
 	plugins: {
-		graphql: graphqlPlugin
+		graphql: graphqlPlugin,
 	},
 	rules: {
 		'graphql/alphabetize': [
@@ -17,8 +17,8 @@ export default [{
 			{
 				fields: ['ObjectTypeDefinition', 'InterfaceTypeDefinition', 'InputObjectTypeDefinition'],
 				values: true,
-				arguments: ['FieldDefinition', 'Field', 'DirectiveDefinition', 'Directive']
-			}
+				arguments: ['FieldDefinition', 'Field', 'DirectiveDefinition', 'Directive'],
+			},
 		],
 		'graphql/description-style': 'error',
 		'graphql/input-name': 'error',
@@ -34,8 +34,8 @@ export default [{
 				InputValueDefinition: 'camelCase',
 				Argument: 'camelCase',
 				DirectiveDefinition: 'camelCase',
-				EnumValueDefinition: 'UPPER_CASE'
-			}
+				EnumValueDefinition: 'UPPER_CASE',
+			},
 		],
 		'graphql/no-unreachable-types': 'error',
 		'graphql/provided-required-arguments': 'error',
@@ -49,6 +49,6 @@ export default [{
 		'graphql/unique-enum-value-names': 'error',
 		'graphql/unique-field-definition-names': 'error',
 		'graphql/unique-operation-types': 'error',
-		'graphql/unique-type-names': 'error'
-	}
+		'graphql/unique-type-names': 'error',
+	},
 }];
